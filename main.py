@@ -1,8 +1,33 @@
+import time
 from playwright.sync_api import sync_playwright
+from bs4 import BeautifulSoup
 
 URL = "https://go.ismates.cz/mates-kk-ski-school/"
 path = "login.txt"
 
+def save_html(raw_html, output_file="calendar_pretty.html"):
+    with open(output_file, "w", encoding="utf-8") as f:
+        f.write(raw_html)
+
+    print("Saved HTML to", output_file)
+
+def save_pretty_html(raw_html, output_file="calendar_pretty.html"):
+    soup = BeautifulSoup(raw_html, "html.parser")
+    pretty = soup.prettify()
+
+    with open(output_file, "w", encoding="utf-8") as f:
+        f.write(pretty)
+
+    print("Saved pretty HTML to", output_file)
+
+def save_text_only(raw_html, output_file="calendar.txt"):
+    soup = BeautifulSoup(raw_html, "html.parser")
+    text = soup.get_text(separator="\n", strip=True)
+
+    with open(output_file, "w", encoding="utf-8") as f:
+        f.write(text)
+
+    print("Saved clean text to", output_file)
 
 def load_credentials(path):
     creds = {}
@@ -13,8 +38,7 @@ def load_credentials(path):
                 creds[key] = value
     return creds
 
-
-def save_calendar_html(username, password, filename="calendar.html"):
+def extract_calendar(username, password, filename="calendar.html"):
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False)     # False to see browser window
         page = browser.new_page()
@@ -37,15 +61,22 @@ def save_calendar_html(username, password, filename="calendar.html"):
         # 5) Wait for calendar to load
         page.wait_for_selector("div.display-sgantt", timeout=15000)
 
-        # 6) Load HTML of calendar
+        # 6) Fill in date
+        page.fill("input.v-datefield-textfield", "1/15/26")
+        page.keyboard.press("Enter")
+        #page.fill("input.v-textfield-tiny", "Tomáš")
+        page.keyboard.press("Enter")
+        time.sleep(3)
+
+        # 7) Load HTML of calendar
         html = page.locator("div.display-sgantt").inner_html()
 
-        # 7) Save to file
-        with open(filename, "w", encoding="utf-8") as f:
-            f.write(html)
+        # 8) Save to files
+        save_html(html)
+        save_pretty_html(html)
+        save_text_only(html)
 
         browser.close()
-        print(f"Calendar saved to {filename}")
 
 
 if __name__ == "__main__":
@@ -54,7 +85,4 @@ if __name__ == "__main__":
     username = creds.get("username")
     password = creds.get("password")
 
-    print("Username:", username)
-    print("Password:", password)
-
-    save_calendar_html(username, password)
+    extract_calendar(username, password)

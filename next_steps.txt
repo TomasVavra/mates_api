@@ -1,4 +1,0 @@
-Instalace Playwrightu
-
-V terminálu:
-bash
