@@ -4,8 +4,11 @@ from bs4 import BeautifulSoup
 
 URL = "https://go.ismates.cz/mates-kk-ski-school/"
 path = "login.txt"
+date = "1/15/26"
+#instructor = "Tomáš"
+instructor = "None"
 
-def save_html(raw_html, output_file="calendar_pretty.html"):
+def save_html(raw_html, output_file="calendar.html"):
     with open(output_file, "w", encoding="utf-8") as f:
         f.write(raw_html)
 
@@ -62,10 +65,14 @@ def extract_calendar(username, password, filename="calendar.html"):
         page.wait_for_selector("div.display-sgantt", timeout=15000)
 
         # 6) Fill in date
-        page.fill("input.v-datefield-textfield", "1/15/26")
+        page.fill("input.v-datefield-textfield", date)
         page.keyboard.press("Enter")
-        #page.fill("input.v-textfield-tiny", "Tomáš")
-        page.keyboard.press("Enter")
+
+        # Fill in name filter
+        if (instructor != "None"):
+            page.fill("input.v-textfield-tiny", instructor)
+            page.keyboard.press("Enter")
+
         time.sleep(3)
 
         # 7) Load HTML of calendar

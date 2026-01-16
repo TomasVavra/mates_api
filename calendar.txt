@@ -166,10 +166,10 @@ Filip (Surfař)
 Kopřiva
 běžky, běžky, ski, ski, telemark, telemark
 CZ, AJ, CZ, AJ
-na telefonu
-12:00 - 16:00
 nedostupnost
 09:00 - 10:00
+na telefonu
+12:00 - 16:00
 Brož Luděk #45221
 FORMÁNKY - OFFICE, Dětská privátní 6-15 výuka SKI 1 osoba online
 10:00 - 12:00
@@ -235,10 +235,10 @@ Klára
 Nováková
 ski, ski
 AJ, CZ, AJ, CZ
-nedostupnost
-14:00 - 16:00
 na telefonu
 11:00 - 16:00
+nedostupnost
+14:00 - 16:00
 MŠ Janky, začátečník
 FORMÁNKY - OFFICE, MATĚŘSKÁ ŠKOLA
 08:30 - 11:00
@@ -292,12 +292,12 @@ Jan (Gardy)
 Zahradníček
 ski, ski
 DE, CZ, AJ, DE, CZ, AJ
-brigáda
-11:45 - 14:45
-úprava školky a vožení sněhu
 ostatní
 15:00 - 16:00
 úklid školky
+brigáda
+11:45 - 14:45
+úprava školky a vožení sněhu
 MŠ Dvůr Králové, začátečník
 FORMÁNKY - OFFICE, DĚTSKÁ ŠKOLKA
 08:00 - 11:00
